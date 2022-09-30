@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table{border-collapse: collapse; margin: 10vh auto;}
+        td{border: 1px solid #333;width:50px;height:50px;padding:10px;text-align: center;}
+        #timer{text-align: center;}
+    </style>
+</head>
+<body>
+    <p id="timer">10</p>
+    <p id="over"></p>
+    <table id="table"></table>
+    <script>
+        const table = document.getElementById("table");
+        const timer = document.getElementById("timer");
+        const over = document.getElementById("over");
+        let arr = [];
+        let game = ["GAME OVER"];
+        let kod = '';
+        let sira = 1;
+        let sn = 9;
+        let saat = setInterval(vaxt, 1000)
+        let a = '';
+        for (let i = 1; i <=16; i++) {
+            arr.push(i)
+        }
+
+        for(let i = 1; i <=4; i++){
+            kod += '<tr>'
+            for(let j = 1; j<=4; j++){
+                let key = rand(0,arr.length - 1);
+                kod += `<td onclick=ac(this)>${arr[key]}</td>`
+                arr.splice(key, 1)
+            }
+            kod += '</tr>'
+        }
+
+        function rand(min,max){
+            return Math.floor(Math.random() * (max-min + 1) + min)
+        }
+
+        function vaxt(){
+            timer.innerHTML = sn--
+            if(sn == -1) {
+                clearTimeout(saat);
+                gameOver()
+            }
+            
+        }
+        
+        function ac(xana){
+           if(xana.innerHTML == sira){
+                xana.style.background = '#eee'
+                xana.style.color = '#aaa'
+                sira++;
+           }else gameOver()
+           
+        }
+
+        function gameOver(){
+            table.style.background = '#232323';
+            over.innerHTML = game;
+            over.split("")
+        }
+        table.innerHTML = kod;
+    </script>
+</body>
+</html>
